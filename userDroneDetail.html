@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Drone Detail - Matrice-4E-01 | AeroFleet OS</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        :root {
+            --sidebar-width: 240px;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #10131a;
+            color: #e1e2ec;
+            overflow-x: hidden;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .osd-shadow {
+            text-shadow: 0px 2px 4px rgba(0,0,0,0.8);
+        }
+        .scanline {
+            width: 100%;
+            height: 100px;
+            z-index: 10;
+            background: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgba(77, 142, 255, 0.05) 50%, rgba(0, 0, 0, 0) 100%);
+            opacity: 0.1;
+            position: absolute;
+            bottom: 100%;
+            animation: scanline 8s linear infinite;
+        }
+        @keyframes scanline {
+            0% { bottom: 100%; }
+            100% { bottom: -100px; }
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "inverse-surface": "#e1e2ec",
+                      "tertiary": "#ffb786",
+                      "on-primary-fixed": "#001a42",
+                      "on-tertiary-fixed-variant": "#723600",
+                      "tertiary-fixed-dim": "#ffb786",
+                      "surface": "#10131a",
+                      "on-secondary-container": "#00311f",
+                      "surface-dim": "#10131a",
+                      "primary-fixed": "#d8e2ff",
+                      "on-surface-variant": "#c2c6d6",
+                      "surface-container-high": "#272a31",
+                      "secondary": "#4edea3",
+                      "on-background": "#e1e2ec",
+                      "tertiary-fixed": "#ffdcc6",
+                      "tertiary-container": "#df7412",
+                      "on-tertiary": "#502400",
+                      "surface-container-low": "#191b23",
+                      "surface-tint": "#adc6ff",
+                      "on-error-container": "#ffdad6",
+                      "surface-variant": "#32353c",
+                      "primary-container": "#4d8eff",
+                      "on-error": "#690005",
+                      "outline-variant": "#424754",
+                      "on-secondary-fixed": "#002113",
+                      "error": "#ffb4ab",
+                      "outline": "#8c909f",
+                      "on-secondary": "#003824",
+                      "on-primary-container": "#00285d",
+                      "background": "#10131a",
+                      "on-secondary-fixed-variant": "#005236",
+                      "surface-bright": "#363941",
+                      "secondary-container": "#00a572",
+                      "on-tertiary-container": "#461f00",
+                      "on-surface": "#e1e2ec",
+                      "inverse-primary": "#005ac2",
+                      "error-container": "#93000a",
+                      "surface-container-lowest": "#0b0e15",
+                      "surface-container": "#1d2027",
+                      "surface-container-highest": "#32353c",
+                      "secondary-fixed-dim": "#4edea3",
+                      "on-primary-fixed-variant": "#004395",
+                      "on-primary": "#002e6a",
+                      "inverse-on-surface": "#2e3038",
+                      "secondary-fixed": "#6ffbbe",
+                      "primary-fixed-dim": "#adc6ff",
+                      "primary": "#adc6ff",
+                      "on-tertiary-fixed": "#311400"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "margin-mobile": "16px",
+                      "margin-desktop": "32px",
+                      "unit": "4px",
+                      "card-gap": "20px",
+                      "sidebar-width": "240px",
+                      "gutter": "16px"
+              },
+              "fontFamily": {
+                      "headline-md": ["Inter"],
+                      "label-caps": ["JetBrains Mono"],
+                      "headline-lg": ["Inter"],
+                      "body-md": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "data-mono": ["JetBrains Mono"],
+                      "display": ["Inter"]
+              },
+              "fontSize": {
+                      "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "headline-lg": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "data-mono": ["13px", {"lineHeight": "18px", "fontWeight": "500"}],
+                      "display": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+              }
+            },
+          },
+        }
+      </script>
+</head>
+<body class="bg-background text-on-background font-body-md selection:bg-primary/30 min-h-screen flex">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-[240px] bg-surface-container-lowest border-r border-outline-variant flex flex-col py-8 z-50">
+<div class="px-6 mb-10">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-3xl">precision_manufacturing</span>
+<div>
+<h1 class="text-headline-lg font-display font-bold text-on-surface leading-none">AeroFleet</h1>
+<p class="text-label-caps font-label-caps text-on-surface-variant mt-1 text-[10px] tracking-widest uppercase">ENTERPRISE CONTROL</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 px-4 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-primary font-bold bg-primary-container/10 border-r-4 border-primary transition-all duration-200" href="userDashboard.html">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-label-caps font-label-caps">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors duration-200" href="userDashboardList.html">
+<span class="material-symbols-outlined">precision_manufacturing</span>
+<span class="text-label-caps font-label-caps">Devices</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors duration-200" href="userMissionList.html">
+<span class="material-symbols-outlined">rocket_launch</span>
+<span class="text-label-caps font-label-caps">Missions</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="text-label-caps font-label-caps">Users</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-label-caps font-label-caps">Settings</span>
+</a>
+</nav>
+</aside>
+<!-- Main Content Area -->
+<!-- Mission Report Popup -->
+<div class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/75 backdrop-blur-md p-4" id="missionReportPopup">
+<div class="relative w-[min(96vw,1600px)] h-[min(94vh,980px)] bg-surface-container-lowest rounded-2xl shadow-2xl overflow-hidden border border-outline-variant">
+<button class="absolute top-4 right-4 z-10 inline-flex items-center justify-center w-10 h-10 rounded-full bg-black/45 border border-white/10 text-white hover:bg-black/65 transition-colors" id="closeMissionReportPopup" type="button" aria-label="Close mission report popup">
+<span class="material-symbols-outlined">close</span>
+</button>
+<iframe class="w-full h-full bg-surface" id="missionReportFrame" title="Mission Report Popup" src="missionReport.html"></iframe>
+</div>
+</div>
+<main class="flex-1 ml-[240px] flex flex-col min-h-screen">
+<!-- TopAppBar -->
+<header class="sticky top-0 z-40 bg-background/80 backdrop-blur-md px-8 py-4 flex justify-between items-center w-full">
+<div class="flex-1 max-w-xl">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-xl">search</span>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-full py-2 pl-10 pr-4 text-body-md focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" placeholder="Search devices, missions, or logs..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<button class="relative p-2 hover:bg-surface-variant rounded-full transition-transform active:scale-95">
+<span class="material-symbols-outlined text-on-surface-variant">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full border-2 border-background"></span>
+</button>
+<button class="p-2 hover:bg-surface-variant rounded-full transition-transform active:scale-95">
+<span class="material-symbols-outlined text-on-surface-variant">help</span>
+</button>
+<div class="h-8 w-[1px] bg-outline-variant"></div>
+<div class="flex items-center gap-3 group cursor-pointer">
+<div class="text-right">
+<p class="text-body-md font-bold text-on-surface group-hover:text-primary transition-colors">Admin User</p>
+<p class="text-[10px] font-label-caps text-secondary-fixed-dim tracking-tight">OPERATIONS OVERSEER</p>
+</div>
+<img class="w-10 h-10 rounded-full border border-primary/50 object-cover" data-alt="A professional high-fidelity portrait of a tech-savvy enterprise administrator in a dark uniform, set against a blurred background of a futuristic control room with glowing blue interface screens. The lighting is moody and cinematic, emphasizing authority and technological precision." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXQRjfavjeoQX_syZWZx0YXtMQiXtCyzJFlXiMsyYjBa7373hsY1L5N74HMszzHkLbLJgO8LLU0F1lEzEfPK9Tlt7M1wFATOM9SNKj4KCCdXZWGQzQZJRUEbVD0a4Ghys5hoZH6aD8PpuBFIbo09gKyrQhUSspeDPXwL3thKtwbcm3iRXq-QlhXILoLYOwE0NpF1iPpOI2hn8mkoBUwfSqNrDMQK9hVShDVAZWddV8fvhJtVNnt5k83XkjIf48ithFgv5HrSeiRI4"/>
+</div>
+</div>
+</header>
+<!-- Page Grid Layout -->
+<div class="p-8 grid grid-cols-12 gap-6 pb-24 overflow-y-auto flex-1">
+<!-- LEFT PANEL: Video & Flight Path (Col 1-8) -->
+<div class="col-span-8 flex flex-col gap-6">
+<!-- Live Video Container -->
+<section class="bg-surface-container-lowest rounded-lg border border-outline-variant relative overflow-hidden aspect-video shadow-lg">
+<div class="absolute inset-0 z-0 bg-black">
+<video autoplay class="w-full h-full object-cover opacity-75" id="yoloDetectionVideo" loop muted playsinline>
+<source src="yolodectection.mp4" type="video/mp4"/>
+                    Trinh duyet khong ho tro phat video.
+                </video>
+<div class="scanline"></div>
+</div>
+<!-- OSD OVERLAY -->
+<div class="absolute inset-0 z-20 p-6 flex flex-col justify-between pointer-events-none">
+<div class="flex justify-between">
+<div class="bg-black/40 backdrop-blur-md border border-white/10 px-3 py-2 rounded">
+<p class="text-xs text-white/60 font-label-caps mb-1">REC • 00:42:15</p>
+<div class="flex gap-4">
+<div class="flex flex-col">
+<span class="text-[10px] text-primary uppercase">Alt</span>
+<span class="font-data-mono text-headline-md text-white osd-shadow">120.4<span class="text-xs ml-0.5">m</span></span>
+</div>
+<div class="flex flex-col">
+<span class="text-[10px] text-primary uppercase">Spd</span>
+<span class="font-data-mono text-headline-md text-white osd-shadow">42.8<span class="text-xs ml-0.5">km/h</span></span>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<div class="bg-black/40 backdrop-blur-md border border-white/10 px-3 py-2 rounded text-right">
+<span class="text-[10px] text-primary uppercase block">Pitch / Roll</span>
+<span class="font-data-mono text-sm text-white osd-shadow">2.4° / -0.8°</span>
+</div>
+</div>
+</div>
+<!-- Center Crosshair / Horizon -->
+<div class="flex-1 flex items-center justify-center">
+<div class="w-64 h-64 border-2 border-white/20 rounded-full relative flex items-center justify-center">
+<div class="w-full h-px bg-secondary/40 absolute"></div>
+<div class="h-full w-px bg-secondary/40 absolute"></div>
+<div class="w-8 h-8 border-2 border-primary rounded-full"></div>
+<!-- Artificial Horizon indicators -->
+<div class="absolute w-24 h-px bg-white/60 -rotate-2 transform translate-y-2"></div>
+</div>
+</div>
+<div class="flex justify-between items-end">
+<div class="bg-black/40 backdrop-blur-md border border-white/10 px-3 py-2 rounded">
+<span class="text-[10px] text-primary uppercase block">HDOP</span>
+<span class="font-data-mono text-sm text-white osd-shadow">0.85 (Excellent)</span>
+</div>
+<div class="flex items-center gap-2 pointer-events-auto">
+<button class="px-3 py-2 bg-primary/90 text-on-primary rounded text-xs font-bold uppercase tracking-wide hover:bg-primary transition-colors flex items-center gap-1" id="yoloPlayToggle" type="button">
+<span class="material-symbols-outlined text-base" id="yoloPlayIcon">pause</span>
+<span id="yoloPlayLabel">Pause</span>
+</button>
+<button class="p-2 bg-black/40 border border-white/10 rounded hover:bg-white/10 transition-colors" type="button">
+<span class="material-symbols-outlined text-white">fullscreen</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Flight Path Map -->
+<section class="bg-surface-container-high rounded-lg border border-outline-variant p-1 h-80 relative">
+<div class="absolute top-4 left-4 z-10 bg-surface/80 backdrop-blur-sm border border-outline-variant px-3 py-2 rounded">
+<h3 class="font-label-caps text-label-caps text-primary uppercase">Tactical Map View</h3>
+</div>
+<div class="w-full h-full bg-cover bg-center rounded grayscale contrast-125 opacity-40" data-alt="A top-down satellite view of a complex industrial port infrastructure with detailed grid lines, waypoints, and a highlighted flight path in neon blue. The map is rendered in a dark, high-contrast tactical style, with shipping containers represented by sharp rectangular blocks and digital UI elements overlaying the terrain. Small drone icons indicate current position and projected trajectory." data-location="Urban Construction Site - Sector 7" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCq9mRq_wK3W5JA5WC3tvp6WbqTxD_KM28y46xdwr_gg_MRG2JlZd4Aa2uXV9sRs2R41RJOmGSthXakjWmNwW1j0r_fEw9qBG_3z_1ya3zKxcuzdYh2mwG-1nXJZ29iGhyXA04vSAD3zgwhrT6_WNEewfHywV9kYwsRfrJO4DZJFtrNih6FwsbNVaT2SOmuea9czHTGaSX99Jpw-XSGMWbTwYbqBsdeylz8uQqo_--cdAyij6QsxAUERSuqfIPRQa9JS1sEweZgqmY')"></div>
+<!-- Mock Flight Path UI (SVG) -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none" viewbox="0 0 800 320">
+<path d="M100,200 L250,150 L400,180 L550,100 L700,140" fill="none" stroke="#4edea3" stroke-dasharray="8 4" stroke-width="2"></path>
+<circle cx="700" cy="140" fill="#4edea3" r="4"></circle>
+<circle cx="100" cy="200" fill="#adc6ff" r="4"></circle>
+</svg>
+</section>
+</div>
+<!-- RIGHT PANEL: Dashboard (Col 9-12) -->
+<div class="col-span-4 flex flex-col gap-6">
+<!-- Telemetry Dashboard -->
+<section class="bg-surface-container rounded-lg border border-outline-variant p-5">
+<h2 class="font-label-caps text-label-caps text-on-surface-variant uppercase mb-4 tracking-widest border-b border-outline-variant pb-2 flex justify-between items-center">
+                        Telemetry
+                        <span class="text-[10px] text-secondary">Real-time Stream</span>
+</h2>
+<div class="grid grid-cols-2 gap-4">
+<!-- Battery -->
+<div class="bg-surface-container-low border border-outline-variant p-3 rounded">
+<div class="flex justify-between items-start mb-2">
+<span class="material-symbols-outlined text-secondary text-lg">battery_charging_80</span>
+<span class="font-data-mono text-xs text-on-surface-variant">82%</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded-full overflow-hidden">
+<div class="bg-secondary h-full" style="width: 82%"></div>
+</div>
+<p class="font-label-caps text-[10px] mt-2 uppercase text-on-surface-variant">Battery Level</p>
+</div>
+<!-- Signal -->
+<div class="bg-surface-container-low border border-outline-variant p-3 rounded">
+<div class="flex justify-between items-start mb-2">
+<span class="material-symbols-outlined text-primary text-lg">signal_cellular_4_bar</span>
+<span class="font-data-mono text-xs text-on-surface-variant">95%</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded-full overflow-hidden">
+<div class="bg-primary h-full" style="width: 95%"></div>
+</div>
+<p class="font-label-caps text-[10px] mt-2 uppercase text-on-surface-variant">Link Quality</p>
+</div>
+<!-- Satellites -->
+<div class="bg-surface-container-low border border-outline-variant p-3 rounded">
+<div class="flex justify-between items-center">
+<span class="material-symbols-outlined text-tertiary text-lg">satellite_alt</span>
+<span class="font-data-mono text-headline-md text-on-surface">18</span>
+</div>
+<p class="font-label-caps text-[10px] mt-2 uppercase text-on-surface-variant">GPS Sats</p>
+</div>
+<!-- Temperature -->
+<div class="bg-surface-container-low border border-outline-variant p-3 rounded">
+<div class="flex justify-between items-center">
+<span class="material-symbols-outlined text-error text-lg">thermostat</span>
+<span class="font-data-mono text-headline-md text-on-surface">42<span class="text-xs">°C</span></span>
+</div>
+<p class="font-label-caps text-[10px] mt-2 uppercase text-on-surface-variant">Motor Temp</p>
+</div>
+</div>
+</section>
+<!-- Payload Status -->
+<section class="bg-surface-container rounded-lg border border-outline-variant p-5">
+<h2 class="font-label-caps text-label-caps text-on-surface-variant uppercase mb-4 tracking-widest border-b border-outline-variant pb-2">Payload Control</h2>
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<span class="text-sm font-body-md text-on-surface">Zenmuse H20N</span>
+<span class="text-[10px] bg-secondary-container/20 text-secondary px-2 py-0.5 rounded border border-secondary/30">THERMAL READY</span>
+</div>
+<!-- Gimbal Control Mock -->
+<div class="bg-surface-container-lowest border border-outline-variant p-4 rounded flex items-center justify-center relative aspect-square max-w-[180px] mx-auto">
+<div class="w-full h-full border border-dashed border-outline-variant rounded-full flex items-center justify-center">
+<div class="w-24 h-24 border border-primary/50 rounded-full flex items-center justify-center bg-primary/5">
+<div class="w-2 h-2 bg-primary rounded-full shadow-[0_0_10px_rgba(173,198,255,0.8)]"></div>
+</div>
+</div>
+<div class="absolute -top-1 left-1/2 -translate-x-1/2 bg-surface text-[9px] px-1 text-on-surface-variant">0°</div>
+<div class="absolute top-1/2 -right-1 -translate-y-1/2 bg-surface text-[9px] px-1 text-on-surface-variant">90°</div>
+</div>
+<div class="grid grid-cols-2 gap-2">
+<button class="bg-surface-container-high border border-outline-variant py-2 rounded text-[10px] font-bold uppercase hover:bg-surface-variant transition-colors">Switch Thermal</button>
+<button class="bg-surface-container-high border border-outline-variant py-2 rounded text-[10px] font-bold uppercase hover:bg-surface-variant transition-colors">Centering</button>
+</div>
+</div>
+</section>
+<!-- Diagnostics -->
+<section class="bg-surface-container rounded-lg border border-outline-variant p-5">
+<h2 class="font-label-caps text-label-caps text-on-surface-variant uppercase mb-4 tracking-widest border-b border-outline-variant pb-2">Sensor Health</h2>
+<ul class="space-y-3">
+<li class="flex items-center justify-between">
+<div class="flex items-center">
+<span class="material-symbols-outlined text-secondary text-sm mr-2" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="text-sm font-body-md">LiDAR Array</span>
+</div>
+<span class="font-data-mono text-[11px] text-on-surface-variant">NOMINAL</span>
+</li>
+<li class="flex items-center justify-between">
+<div class="flex items-center">
+<span class="material-symbols-outlined text-secondary text-sm mr-2" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="text-sm font-body-md">Ultrasonic Depth</span>
+</div>
+<span class="font-data-mono text-[11px] text-on-surface-variant">NOMINAL</span>
+</li>
+<li class="flex items-center justify-between">
+<div class="flex items-center">
+<span class="material-symbols-outlined text-secondary text-sm mr-2" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="text-sm font-body-md">IMU Calibration</span>
+</div>
+<span class="font-data-mono text-[11px] text-on-surface-variant">NOMINAL</span>
+</li>
+<li class="flex items-center justify-between">
+<div class="flex items-center">
+<span class="material-symbols-outlined text-primary text-sm mr-2">info</span>
+<span class="text-sm font-body-md">Obstacle Sensing</span>
+</div>
+<span class="font-data-mono text-[11px] text-primary">ACTIVE</span>
+</li>
+</ul>
+</section>
+</div>
+<!-- BOTTOM SECTION: Logs (Col 1-12) -->
+<div class="col-span-12">
+<section class="bg-surface-container rounded-lg border border-outline-variant">
+<div class="px-6 py-4 border-b border-outline-variant flex justify-between items-center">
+<h2 class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest">Recent Mission Logs</h2>
+<button class="text-xs text-primary font-bold hover:underline">View All Logs</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="border-b border-outline-variant bg-surface-container-low">
+<th class="px-6 py-3 font-label-caps text-[11px] text-on-surface-variant uppercase tracking-widest">Mission ID</th>
+<th class="px-6 py-3 font-label-caps text-[11px] text-on-surface-variant uppercase tracking-widest">Status</th>
+<th class="px-6 py-3 font-label-caps text-[11px] text-on-surface-variant uppercase tracking-widest">Duration</th>
+<th class="px-6 py-3 font-label-caps text-[11px] text-on-surface-variant uppercase tracking-widest">Payload Usage</th>
+<th class="px-6 py-3 font-label-caps text-[11px] text-on-surface-variant uppercase tracking-widest">Data Link</th>
+</tr>
+</thead>
+<tbody class="font-data-mono text-sm divide-y divide-outline-variant/30">
+<tr class="hover:bg-surface-container-high transition-colors group">
+<td class="px-6 py-4 font-bold text-on-surface">MISSION ALPHA</td>
+<td class="px-6 py-4">
+<span class="text-on-surface-variant bg-surface-container-highest px-2 py-0.5 rounded text-[10px]">COMPLETED</span>
+</td>
+<td class="px-6 py-4 text-on-surface-variant">01:14:22</td>
+<td class="px-6 py-4 text-on-surface-variant">Thermal / RGB</td>
+<td class="px-6 py-4 text-secondary flex items-center">
+<span class="material-symbols-outlined text-sm mr-1">check</span> Stable
+                                    </td>
+</tr>
+<tr class="hover:bg-surface-container-high transition-colors group bg-primary/5">
+<td class="px-6 py-4 font-bold text-primary">MISSION BETA</td>
+<td class="px-6 py-4">
+<span class="text-secondary border border-secondary px-2 py-0.5 rounded text-[10px] animate-pulse">ACTIVE</span>
+</td>
+<td class="px-6 py-4 text-primary">00:42:15</td>
+<td class="px-6 py-4 text-on-surface-variant">Thermal Only</td>
+<td class="px-6 py-4 text-secondary flex items-center">
+<span class="material-symbols-outlined text-sm mr-1">check</span> Stable
+                                    </td>
+</tr>
+<tr class="hover:bg-surface-container-high transition-colors group">
+<td class="px-6 py-4 font-bold text-on-surface">SYSTEM CHECK</td>
+<td class="px-6 py-4">
+<span class="text-tertiary border border-tertiary px-2 py-0.5 rounded text-[10px]">SCHEDULED</span>
+</td>
+<td class="px-6 py-4 text-on-surface-variant">--:--:--</td>
+<td class="px-6 py-4 text-on-surface-variant">All Sensors</td>
+<td class="px-6 py-4 text-on-surface-variant flex items-center">
+<span class="material-symbols-outlined text-sm mr-1">pending</span> Waiting
+                                    </td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</div>
+</div>
+<!-- Footer (Authority: JSON) -->
+<footer class="w-full bg-surface-container-lowest text-on-surface-variant font-data-mono text-data-mono flex justify-between items-center px-gutter py-2 border-t border-outline-variant fixed bottom-0 left-[240px] w-[calc(100%-240px)]">
+<p>© 2024 AeroFleet Systems. Mission-Critical Protocol Active.</p>
+<div class="flex space-x-6">
+<a class="hover:text-primary transition-colors cursor-pointer" href="#">Privacy Policy</a>
+<a class="hover:text-primary transition-colors cursor-pointer" href="#">Terms of Service</a>
+<a class="hover:text-primary transition-colors cursor-pointer" href="#">Security Log</a>
+</div>
+</footer>
+</main>
+<script>
+        // Micro-interaction: Update OSD Telemetry slightly for "live" feel
+        setInterval(() => {
+            const altEl = document.querySelector('.osd-shadow');
+            if(altEl) {
+                const currentAlt = 120.4;
+                const variance = (Math.random() - 0.5) * 0.2;
+                // Since there are multiple .osd-shadow, we'd normally target IDs.
+                // Just for effect, we won't actually swap DOM text to avoid reflow spikes in the demo.
+            }
+        }, 1000);
+
+        const yoloVideo = document.getElementById('yoloDetectionVideo');
+        const yoloPlayToggle = document.getElementById('yoloPlayToggle');
+        const yoloPlayIcon = document.getElementById('yoloPlayIcon');
+        const yoloPlayLabel = document.getElementById('yoloPlayLabel');
+        const missionReportPopup = document.getElementById('missionReportPopup');
+        const closeMissionReportPopup = document.getElementById('closeMissionReportPopup');
+        const missionReportFrame = document.getElementById('missionReportFrame');
+
+        function openMissionReportPopup() {
+            if (!missionReportPopup) {
+                return;
+            }
+
+            missionReportPopup.classList.remove('hidden');
+            missionReportPopup.classList.add('flex');
+
+            if (missionReportFrame && !missionReportFrame.getAttribute('src')) {
+                missionReportFrame.setAttribute('src', 'missionReport.html');
+            }
+        }
+
+        function closeMissionReportPopupHandler() {
+            if (!missionReportPopup) {
+                return;
+            }
+
+            missionReportPopup.classList.add('hidden');
+            missionReportPopup.classList.remove('flex');
+        }
+
+        function syncYoloVideoState() {
+            const isPlaying = yoloVideo && !yoloVideo.paused;
+            yoloPlayIcon.textContent = isPlaying ? 'pause' : 'play_arrow';
+            yoloPlayLabel.textContent = isPlaying ? 'Pause' : 'Play';
+        }
+
+        if (yoloVideo && yoloPlayToggle) {
+            yoloPlayToggle.addEventListener('click', () => {
+                if (yoloVideo.paused) {
+                    closeMissionReportPopupHandler();
+                    yoloVideo.play().catch(() => {});
+                } else {
+                    yoloVideo.pause();
+                    openMissionReportPopup();
+                }
+                syncYoloVideoState();
+            });
+
+            yoloVideo.addEventListener('play', syncYoloVideoState);
+            yoloVideo.addEventListener('pause', syncYoloVideoState);
+            syncYoloVideoState();
+        }
+
+        if (closeMissionReportPopup) {
+            closeMissionReportPopup.addEventListener('click', closeMissionReportPopupHandler);
+        }
+
+        if (missionReportPopup) {
+            missionReportPopup.addEventListener('click', (event) => {
+                if (event.target === missionReportPopup) {
+                    closeMissionReportPopupHandler();
+                }
+            });
+        }
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                closeMissionReportPopupHandler();
+            }
+        });
+    </script>
+</body></html>

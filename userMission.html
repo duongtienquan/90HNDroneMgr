@@ -1,0 +1,515 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>AeroFleet | New Mission Configuration</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-lowest": "#0b0e15",
+                    "inverse-surface": "#e1e2ec",
+                    "secondary": "#4edea3",
+                    "inverse-on-surface": "#2e3038",
+                    "surface-dim": "#10131a",
+                    "tertiary-container": "#df7412",
+                    "on-primary-fixed-variant": "#004395",
+                    "primary-fixed-dim": "#adc6ff",
+                    "error-container": "#93000a",
+                    "surface-tint": "#adc6ff",
+                    "secondary-fixed-dim": "#4edea3",
+                    "background": "#10131a",
+                    "surface": "#10131a",
+                    "on-tertiary-fixed-variant": "#723600",
+                    "tertiary-fixed-dim": "#ffb786",
+                    "primary": "#adc6ff",
+                    "on-tertiary-container": "#461f00",
+                    "on-background": "#e1e2ec",
+                    "primary-fixed": "#d8e2ff",
+                    "on-primary-container": "#00285d",
+                    "surface-variant": "#32353c",
+                    "secondary-container": "#00a572",
+                    "on-secondary": "#003824",
+                    "on-primary": "#002e6a",
+                    "surface-bright": "#363941",
+                    "on-primary-fixed": "#001a42",
+                    "on-surface-variant": "#c2c6d6",
+                    "error": "#ffb4ab",
+                    "tertiary": "#ffb786",
+                    "inverse-primary": "#005ac2",
+                    "surface-container-highest": "#32353c",
+                    "on-tertiary": "#502400",
+                    "outline": "#8c909f",
+                    "on-surface": "#e1e2ec",
+                    "outline-variant": "#424754",
+                    "on-secondary-fixed": "#002113",
+                    "on-secondary-container": "#00311f",
+                    "tertiary-fixed": "#ffdcc6",
+                    "secondary-fixed": "#6ffbbe",
+                    "surface-container-low": "#191b23",
+                    "on-error": "#690005",
+                    "on-tertiary-fixed": "#311400",
+                    "surface-container-high": "#272a31",
+                    "primary-container": "#4d8eff",
+                    "surface-container": "#1d2027",
+                    "on-secondary-fixed-variant": "#005236",
+                    "on-error-container": "#ffdad6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "margin-desktop": "32px",
+                    "sidebar-width": "240px",
+                    "margin-mobile": "16px",
+                    "card-gap": "20px",
+                    "gutter": "16px",
+                    "unit": "4px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Inter"],
+                    "data-mono": ["JetBrains Mono"],
+                    "headline-md": ["Inter"],
+                    "body-md": ["Inter"],
+                    "label-caps": ["JetBrains Mono"],
+                    "headline-lg": ["Inter"],
+                    "display": ["Inter"]
+            },
+            "fontSize": {
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "data-mono": ["13px", {"lineHeight": "18px", "fontWeight": "500"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-lg": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "display": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .step-active { border-color: #adc6ff; color: #adc6ff; }
+        .step-inactive { border-color: #424754; color: #c2c6d6; }
+        
+        /* Custom scrollbar for technical UI */
+        ::-webkit-scrollbar { width: 4px; height: 4px; }
+        ::-webkit-scrollbar-track { background: #0b0e15; }
+        ::-webkit-scrollbar-thumb { background: #32353c; border-radius: 2px; }
+        ::-webkit-scrollbar-thumb:hover { background: #424754; }
+
+        .scanline {
+            width: 100%;
+            height: 2px;
+            background: rgba(77, 142, 255, 0.1);
+            position: absolute;
+            animation: scan 4s linear infinite;
+            z-index: 10;
+            pointer-events: none;
+        }
+        @keyframes scan {
+            0% { top: 0; }
+            100% { top: 100%; }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md overflow-hidden">
+<!-- Sidebar Navigation -->
+<aside class="fixed left-0 top-0 h-full w-[240px] flex flex-col h-full py-8 border-r border-outline-variant bg-surface z-50">
+<div class="px-6 mb-12">
+<h1 class="text-headline-lg font-display font-bold text-on-surface">AeroFleet</h1>
+<p class="text-label-caps font-label-caps text-primary tracking-widest mt-1">ENTERPRISE CONTROL</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center px-6 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200" href="userDashboard.html">
+<span class="material-symbols-outlined mr-3">dashboard</span>
+<span class="text-label-caps font-label-caps">Dashboard</span>
+</a>
+<a class="flex items-center px-6 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200" href="userDashboardList.html">
+<span class="material-symbols-outlined mr-3">precision_manufacturing</span>
+<span class="text-label-caps font-label-caps">Devices</span>
+</a>
+<a class="flex items-center px-6 py-3 text-primary font-bold bg-primary-container/10 border-r-4 border-primary transition-all" href="userMissionList.html">
+<span class="material-symbols-outlined mr-3">rocket_launch</span>
+<span class="text-label-caps font-label-caps">Missions</span>
+</a>
+<a class="flex items-center px-6 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3">group</span>
+<span class="text-label-caps font-label-caps">Users</span>
+</a>
+<a class="flex items-center px-6 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 mt-auto" href="#">
+<span class="material-symbols-outlined mr-3">settings</span>
+<span class="text-label-caps font-label-caps">Settings</span>
+</a>
+</nav>
+</aside>
+<!-- Main Content Shell -->
+<main class="ml-[240px] w-[calc(100%-240px)] h-screen flex flex-col">
+<!-- Top App Bar -->
+<header class="sticky top-0 z-40 bg-background/80 backdrop-blur-md px-8 py-4 flex justify-between items-center w-full">
+<div class="flex-1 max-w-xl">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-xl">search</span>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-full py-2 pl-10 pr-4 text-body-md focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" placeholder="Search devices, missions, or logs..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<button class="relative p-2 hover:bg-surface-variant rounded-full transition-transform active:scale-95">
+<span class="material-symbols-outlined text-on-surface-variant">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full border-2 border-background"></span>
+</button>
+<button class="p-2 hover:bg-surface-variant rounded-full transition-transform active:scale-95">
+<span class="material-symbols-outlined text-on-surface-variant">help</span>
+</button>
+<div class="h-8 w-[1px] bg-outline-variant"></div>
+<div class="flex items-center gap-3 group cursor-pointer">
+<div class="text-right">
+<p class="text-body-md font-bold text-on-surface group-hover:text-primary transition-colors">Admin User</p>
+<p class="text-[10px] font-label-caps text-secondary-fixed-dim tracking-tight">OPERATIONS OVERSEER</p>
+</div>
+<img class="w-10 h-10 rounded-full border border-primary/50 object-cover" data-alt="A professional high-fidelity portrait of a tech-savvy enterprise administrator in a dark uniform, set against a blurred background of a futuristic control room with glowing blue interface screens. The lighting is moody and cinematic, emphasizing authority and technological precision." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXQRjfavjeoQX_syZWZx0YXtMQiXtCyzJFlXiMsyYjBa7373hsY1L5N74HMszzHkLbLJgO8LLU0F1lEzEfPK9Tlt7M1wFATOM9SNKj4KCCdXZWGQzQZJRUEbVD0a4Ghys5hoZH6aD8PpuBFIbo09gKyrQhUSspeDPXwL3thKtwbcm3iRXq-QlhXILoLYOwE0NpF1iPpOI2hn8mkoBUwfSqNrDMQK9hVShDVAZWddV8fvhJtVNnt5k83XkjIf48ithFgv5HrSeiRI4"/>
+</div>
+</div>
+</header>
+<!-- Configuration Workspace -->
+<div class="flex-1 overflow-y-auto px-8 py-6 flex gap-6 content-start">
+<!-- Left Config Column -->
+<div class="w-1/3 flex flex-col gap-6">
+<!-- Section 1: Mission Identity -->
+<section class="bg-surface-container border border-outline-variant p-6 rounded-lg relative overflow-hidden">
+<div class="flex items-center justify-between mb-6">
+<div class="flex items-center gap-2">
+<span class="text-primary text-[14px] font-bold">01</span>
+<h3 class="text-label-caps font-label-caps">Mission Identity</h3>
+</div>
+<span class="material-symbols-outlined text-outline text-[18px]">badge</span>
+</div>
+<div class="space-y-4">
+<div>
+<label class="block text-[11px] text-outline uppercase font-bold mb-1 ml-1">Mission Name</label>
+<input class="w-full bg-surface-container-lowest border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary/20 rounded px-3 py-2 text-data-mono uppercase tracking-wider text-[13px]" type="text" value="PERIMETER_SURVEILLANCE_ALPHA">
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="block text-[11px] text-outline uppercase font-bold mb-1 ml-1">Mission ID</label>
+<div class="bg-surface-container-low border border-outline-variant rounded px-3 py-2 text-data-mono text-outline text-[13px]">
+                                    AF-992-QX
+                                </div>
+</div>
+<div>
+<label class="block text-[11px] text-outline uppercase font-bold mb-1 ml-1">Priority</label>
+<select class="w-full bg-surface-container-lowest border border-outline-variant focus:border-primary rounded px-3 py-2 text-data-mono text-[13px]">
+<option>CRITICAL</option>
+<option selected="">HIGH</option>
+<option>ROUTINE</option>
+</select>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 2: Drone Selection -->
+<section class="bg-surface-container border border-outline-variant p-6 rounded-lg flex-1">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-2">
+<span class="text-primary text-[14px] font-bold">02</span>
+<h3 class="text-label-caps font-label-caps">Unit Selection</h3>
+</div>
+<div class="text-[10px] bg-secondary/10 text-secondary border border-secondary/30 px-2 py-0.5 rounded">4 AVAILABLE</div>
+</div>
+<div class="space-y-3">
+<!-- Unit Card (Active) -->
+<div class="p-4 bg-surface-container-lowest border border-primary/50 rounded-lg group cursor-pointer ring-1 ring-primary/20">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-primary/10 rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">airplanemode_active</span>
+</div>
+<div>
+<p class="text-label-caps font-label-caps text-[13px]">MATRICE 300 RTK</p>
+<p class="text-[10px] text-outline">SN: AF-M300-882</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-primary text-[18px]">check_circle</span>
+</div>
+<div class="grid grid-cols-2 gap-2 mt-4">
+<div class="bg-surface-container-high p-2 rounded border border-outline-variant/30">
+<p class="text-[9px] text-outline uppercase mb-1">Battery</p>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[14px] text-secondary">battery_full</span>
+<span class="text-data-mono text-[12px]">92%</span>
+</div>
+</div>
+<div class="bg-surface-container-high p-2 rounded border border-outline-variant/30">
+<p class="text-[9px] text-outline uppercase mb-1">Health</p>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[14px] text-secondary">verified</span>
+<span class="text-data-mono text-[12px]">OPTIMAL</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Unit Card (Inactive) -->
+<div class="p-4 bg-surface-container-lowest border border-outline-variant rounded-lg hover:border-outline transition-colors cursor-pointer opacity-70">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-surface-container-high rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-outline">airplanemode_active</span>
+</div>
+<div>
+<p class="text-label-caps font-label-caps text-[13px]">MATRICE 350</p>
+<p class="text-[10px] text-outline">SN: AF-M350-104</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline text-[18px] opacity-0">circle</span>
+</div>
+<div class="grid grid-cols-2 gap-2 mt-4">
+<div class="bg-surface-container-high p-2 rounded">
+<p class="text-[9px] text-outline uppercase mb-1">Battery</p>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[14px] text-tertiary">battery_4_bar</span>
+<span class="text-data-mono text-[12px]">74%</span>
+</div>
+</div>
+<div class="bg-surface-container-high p-2 rounded">
+<p class="text-[9px] text-outline uppercase mb-1">Health</p>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[14px] text-secondary">verified</span>
+<span class="text-data-mono text-[12px]">NOMINAL</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Middle Column: Map & Waypoints -->
+<div class="w-2/3 flex flex-col gap-6">
+<!-- Section 3: Interactive Map -->
+<section class="bg-surface-container border border-outline-variant rounded-lg flex flex-col relative flex-[2] overflow-hidden">
+<div class="absolute top-4 left-4 z-20 flex gap-2">
+<div class="bg-surface/90 backdrop-blur-md border border-outline-variant p-1 rounded-lg flex gap-1 shadow-lg">
+<button class="bg-primary text-on-primary-container p-2 rounded transition-all"><span class="material-symbols-outlined text-[20px]">polyline</span></button>
+<button class="hover:bg-surface-container-high p-2 rounded transition-all"><span class="material-symbols-outlined text-[20px]">pentagon</span></button>
+<button class="hover:bg-surface-container-high p-2 rounded transition-all"><span class="material-symbols-outlined text-[20px]">location_on</span></button>
+<button class="hover:bg-surface-container-high p-2 rounded transition-all"><span class="material-symbols-outlined text-[20px]">layers</span></button></div>
+<div class="bg-surface/90 backdrop-blur-md border border-outline-variant px-3 py-2 rounded-lg shadow-lg flex items-center gap-4">
+<div class="flex flex-col">
+<span class="text-[9px] text-outline uppercase font-bold">Center Coord</span>
+<span class="text-data-mono text-[11px]">34.0522° N, 118.2437° W</span>
+</div>
+<div class="h-6 w-[1px] bg-outline-variant"></div>
+<div class="flex flex-col">
+<span class="text-[9px] text-outline uppercase font-bold">Total Dist</span>
+<span class="text-data-mono text-[11px] text-primary">12.4 KM</span>
+</div>
+</div>
+</div>
+<!-- Map UI Elements Overlay -->
+<div class="absolute inset-0 z-10 pointer-events-none border-[12px] border-surface-container-lowest/20"></div>
+<div class="scanline"></div>
+<div class="flex-1 bg-surface-dim relative group cursor-crosshair">
+<div class="w-full h-full bg-cover bg-center opacity-80" data-alt="A high-quality roadmap view of an urban area with clear street names, blocks, and road networks, integrated with tactical HUD overlays including blue waypoint paths and red geofencing zones." style="background-image: url(&quot;https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&amp;fit=crop&amp;q=80&amp;w=2000&quot;);"></div>
+<!-- Waypoint Indicators -->
+<div class="absolute top-1/2 left-1/3 w-4 h-4 bg-primary rounded-full border-2 border-white shadow-[0_0_15px_rgba(173,198,255,0.8)] flex items-center justify-center">
+<span class="text-[8px] font-bold text-on-primary-container">1</span>
+</div>
+<div class="absolute top-[40%] left-1/2 w-4 h-4 bg-primary rounded-full border-2 border-white shadow-[0_0_15px_rgba(173,198,255,0.8)] flex items-center justify-center">
+<span class="text-[8px] font-bold text-on-primary-container">2</span>
+</div>
+<div class="absolute bottom-4 right-4 z-20 flex flex-col gap-2">
+<button class="bg-surface/90 backdrop-blur-md border border-outline-variant p-2 rounded-lg hover:bg-surface-container-high transition-all">
+<span class="material-symbols-outlined">add</span>
+</button>
+<button class="bg-surface/90 backdrop-blur-md border border-outline-variant p-2 rounded-lg hover:bg-surface-container-high transition-all">
+<span class="material-symbols-outlined">remove</span>
+</button>
+<button class="bg-surface/90 backdrop-blur-md border border-outline-variant p-2 rounded-lg hover:bg-surface-container-high transition-all">
+<span class="material-symbols-outlined">my_location</span>
+</button>
+</div>
+</div>
+<!-- Map Footer Data -->
+<div class="bg-surface-container-high p-3 border-t border-outline-variant flex items-center justify-between">
+<div class="flex gap-6">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 bg-primary/40 border border-primary rounded-sm"></span>
+<span class="text-data-mono text-[11px] text-outline uppercase">Waypoint Path</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 bg-error/20 border border-error/50 rounded-sm"></span>
+<span class="text-data-mono text-[11px] text-outline uppercase">No-Fly Zone</span>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-[10px] text-outline">AUTO-GENERATED COORDINATES: VERIFIED</span>
+<span class="material-symbols-outlined text-secondary text-[16px]">verified_user</span>
+</div>
+</div>
+</section>
+<!-- Bottom Config Row -->
+<div class="flex gap-6 flex-1">
+<!-- Section 4: Safety Protocols -->
+<section class="bg-surface-container border border-outline-variant p-6 rounded-lg flex-1">
+<div class="flex items-center justify-between mb-5">
+<div class="flex items-center gap-2">
+<span class="text-primary text-[14px] font-bold">04</span>
+<h3 class="text-label-caps font-label-caps">Safety Protocols</h3>
+</div>
+<span class="material-symbols-outlined text-outline text-[18px]">security</span>
+</div>
+<div class="space-y-4">
+<label class="flex items-center justify-between group cursor-pointer">
+<span class="text-body-md text-on-surface-variant group-hover:text-on-surface transition-colors">PPE Detection AI</span>
+<div class="relative inline-flex h-5 w-9 items-center rounded-full bg-surface-variant border border-outline-variant">
+<input checked="" class="sr-only peer" type="checkbox">
+<div class="h-3 w-3 translate-x-5 rounded-full bg-primary transition-transform peer-checked:translate-x-5 peer-not-checked:translate-x-1 peer-not-checked:bg-outline"></div>
+</div>
+</label>
+<label class="flex items-center justify-between group cursor-pointer">
+<span class="text-body-md text-on-surface-variant group-hover:text-on-surface transition-colors">Perimeter Breach Alerts</span>
+<div class="relative inline-flex h-5 w-9 items-center rounded-full bg-surface-variant border border-outline-variant">
+<input checked="" class="sr-only peer" type="checkbox">
+<div class="h-3 w-3 translate-x-5 rounded-full bg-primary transition-transform peer-checked:translate-x-5"></div>
+</div>
+</label>
+<label class="flex items-center justify-between group cursor-pointer">
+<span class="text-body-md text-on-surface-variant group-hover:text-on-surface transition-colors">Fail-Safe Override</span>
+<div class="relative inline-flex h-5 w-9 items-center rounded-full bg-surface-variant border border-outline-variant">
+<input class="sr-only peer" type="checkbox">
+<div class="h-3 w-3 translate-x-1 rounded-full bg-outline transition-transform peer-checked:translate-x-5"></div>
+</div>
+</label>
+</div>
+</section>
+<!-- Section 5: Launch Parameters -->
+<section class="bg-surface-container border border-outline-variant p-6 rounded-lg flex-1">
+<div class="flex items-center justify-between mb-5">
+<div class="flex items-center gap-2">
+<span class="text-primary text-[14px] font-bold">05</span>
+<h3 class="text-label-caps font-label-caps">Launch Params</h3>
+</div>
+<span class="material-symbols-outlined text-outline text-[18px]">flight_takeoff</span>
+</div>
+<div class="space-y-4">
+<div>
+<div class="flex justify-between mb-1 px-1">
+<label class="text-[10px] text-outline uppercase font-bold">Takeoff Alt</label>
+<span class="text-data-mono text-[11px] text-primary">120M</span>
+</div>
+<input class="w-full h-1 bg-surface-container-low rounded-lg appearance-none cursor-pointer accent-primary" type="range">
+</div>
+<div>
+<label class="block text-[10px] text-outline uppercase font-bold mb-1 ml-1">RTH Protocol</label>
+<select class="w-full bg-surface-container-lowest border border-outline-variant focus:border-primary rounded px-3 py-1.5 text-data-mono text-[12px]">
+<option>SMART RETURN</option>
+<option>HOVER &amp; WAIT</option>
+<option>EMERGENCY LAND</option>
+</select>
+</div>
+</div>
+</section>
+</div>
+</div>
+</div>
+<!-- Sticky Footer Action -->
+<footer class="bg-surface-container-high border-t border-outline-variant px-8 py-6 flex justify-between items-center mt-auto">
+<div class="flex gap-8">
+<div class="flex flex-col">
+<span class="text-[10px] text-outline uppercase font-bold tracking-widest">Configuration Status</span>
+<div class="flex items-center gap-2 mt-1">
+<span class="material-symbols-outlined text-secondary text-[18px]">task_alt</span>
+<span class="text-body-md font-medium">9/9 PARAMETERS VALIDATED</span>
+</div>
+</div>
+<div class="w-[1px] h-10 bg-outline-variant"></div>
+<div class="flex flex-col">
+<span class="text-[10px] text-outline uppercase font-bold tracking-widest">Est. Duration</span>
+<div class="flex items-center gap-2 mt-1">
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">schedule</span>
+<span class="text-body-md font-medium">00:42:15</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="px-6 py-3 rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-all font-label-caps uppercase tracking-wider text-[13px]">
+                    Save Template
+                </button>
+<button class="flex items-center gap-3 px-10 py-3 rounded-lg bg-primary text-on-primary font-bold shadow-[0_0_20px_rgba(77,142,255,0.3)] hover:scale-105 active:scale-95 transition-all group" id="initializeBtn">
+<span class="text-label-caps font-label-caps uppercase tracking-[0.1em] text-[15px]">Initialize Mission</span>
+<span class="material-symbols-outlined text-[20px] group-hover:translate-x-1 transition-transform">bolt</span>
+</button>
+</div>
+</footer>
+</main>
+<!-- Initialization Modal (Hidden by default) -->
+<div class="fixed inset-0 bg-background/95 z-[100] hidden flex items-center justify-center p-8" id="initModal">
+<div class="max-w-xl w-full bg-surface-container border border-primary/30 p-10 rounded-xl flex flex-col items-center text-center relative overflow-hidden">
+<div class="scanline"></div>
+<div class="w-20 h-20 rounded-full border-2 border-primary/20 flex items-center justify-center mb-8 relative">
+<div class="absolute inset-0 border-t-2 border-primary rounded-full animate-spin"></div>
+<span class="material-symbols-outlined text-primary text-4xl">rocket_launch</span>
+</div>
+<h2 class="text-display font-display text-on-surface mb-2">INITIALIZING</h2>
+<p class="text-label-caps font-label-caps text-outline mb-10">UPLOADING PARAMETERS TO AF-992-QX • 42% COMPLETE</p>
+<div class="w-full h-1 bg-surface-container-low rounded-full overflow-hidden mb-8">
+<div class="w-[42%] h-full bg-primary"></div>
+</div>
+<div class="grid grid-cols-2 gap-4 w-full">
+<div class="p-3 bg-surface-container-lowest rounded border border-outline-variant text-left">
+<p class="text-[9px] text-outline uppercase mb-1">C2 Uplink</p>
+<div class="flex items-center gap-2 text-secondary">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+<span class="text-data-mono text-[11px]">ENCRYPTED</span>
+</div>
+</div>
+<div class="p-3 bg-surface-container-lowest rounded border border-outline-variant text-left">
+<p class="text-[9px] text-outline uppercase mb-1">Pre-Flight</p>
+<div class="flex items-center gap-2 text-primary">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="text-data-mono text-[11px]">IN PROGRESS</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+        const initBtn = document.getElementById('initializeBtn');
+        const modal = document.getElementById('initModal');
+
+        initBtn.addEventListener('click', () => {
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                // Mock redirect or close after loading
+                // modal.classList.add('hidden');
+            }, 3000);
+        });
+
+        // Toggle checkboxes visually for demo
+        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', (e) => {
+                const indicator = e.target.nextElementSibling;
+                if(e.target.checked) {
+                    indicator.classList.replace('translate-x-1', 'translate-x-5');
+                    indicator.classList.replace('bg-outline', 'bg-primary');
+                } else {
+                    indicator.classList.replace('translate-x-5', 'translate-x-1');
+                    indicator.classList.replace('bg-primary', 'bg-outline');
+                }
+            });
+        });
+    </script>
+
+
+</body></html>

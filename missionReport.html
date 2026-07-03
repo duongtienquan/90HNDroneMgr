@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html class="dark" lang="vi">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AeroFleet Command - Báo cáo Tổng kết Nhiệm vụ</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        background: '#10131a',
+                        surface: '#10131a',
+                        'surface-container': '#1d2027',
+                        'surface-container-low': '#191b23',
+                        'surface-container-high': '#272a31',
+                        'surface-container-highest': '#32353c',
+                        'surface-container-lowest': '#0b0e15',
+                        'surface-variant': '#32353c',
+                        primary: '#adc6ff',
+                        'primary-container': '#4d8eff',
+                        secondary: '#4edea3',
+                        'secondary-container': '#00a572',
+                        tertiary: '#ffb786',
+                        'tertiary-container': '#df7412',
+                        error: '#ffb4ab',
+                        'error-container': '#93000a',
+                        outline: '#8c909f',
+                        'outline-variant': '#424754',
+                        'on-surface': '#e1e2ec',
+                        'on-surface-variant': '#c2c6d6',
+                        'on-primary': '#002e6a',
+                        'on-primary-container': '#00285d',
+                        'on-secondary': '#003824',
+                        'on-secondary-container': '#00311f',
+                        'on-tertiary': '#502400',
+                        'on-tertiary-container': '#461f00',
+                        'on-error': '#690005',
+                        'on-error-container': '#ffdad6',
+                        'secondary-fixed-dim': '#4edea3'
+                    },
+                    spacing: {
+                        gutter: '16px',
+                        'margin-desktop': '32px',
+                        'card-gap': '20px'
+                    },
+                    fontFamily: {
+                        display: ['Inter'],
+                        'headline-md': ['Inter'],
+                        'headline-lg': ['Inter'],
+                        'body-md': ['Inter'],
+                        'body-lg': ['Inter'],
+                        'label-caps': ['JetBrains Mono'],
+                        'data-mono': ['JetBrains Mono']
+                    },
+                    fontSize: {
+                        display: ['32px', { lineHeight: '40px', letterSpacing: '-0.02em', fontWeight: '700' }],
+                        'headline-lg': ['24px', { lineHeight: '32px', fontWeight: '600' }],
+                        'headline-md': ['20px', { lineHeight: '28px', fontWeight: '600' }],
+                        'body-md': ['14px', { lineHeight: '20px', fontWeight: '400' }],
+                        'body-lg': ['16px', { lineHeight: '24px', fontWeight: '400' }],
+                        'label-caps': ['12px', { lineHeight: '16px', letterSpacing: '0.05em', fontWeight: '600' }],
+                        'data-mono': ['13px', { lineHeight: '18px', fontWeight: '500' }]
+                    },
+                    borderRadius: {
+                        DEFAULT: '0.125rem',
+                        lg: '0.25rem',
+                        xl: '0.5rem',
+                        full: '0.75rem'
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #10131a;
+            color: #e1e2ec;
+            -webkit-font-smoothing: antialiased;
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md overflow-auto">
+<!-- Report Content -->
+<div class="p-6 lg:p-8 space-y-6 max-w-[1600px] mx-auto w-full">
+<!-- Header Actions -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+<div>
+<h2 class="font-display text-display text-on-surface leading-tight">Báo cáo Tổng kết Nhiệm vụ: Mission #A-2024</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1 flex items-center gap-2 text-[11px] md:text-sm">
+<span class="w-2 h-2 rounded-full bg-secondary"></span> Hoàn thành: 24/10/2023 14:30 | Người điều hành: Controller Alpha-1
+                    </p>
+</div>
+<div class="flex gap-3 self-start md:self-auto">
+<button class="flex items-center gap-2 px-4 py-2 border border-outline-variant hover:bg-surface-container-high transition-colors text-on-surface font-label-caps text-label-caps rounded text-[10px] md:text-label-caps">
+<span class="material-symbols-outlined text-sm">print</span> IN BÁO CÁO
+                    </button>
+<button class="flex items-center gap-2 px-4 py-2 bg-primary text-on-primary hover:bg-primary-container transition-colors font-label-caps text-label-caps rounded shadow-lg text-[10px] md:text-label-caps">
+<span class="material-symbols-outlined text-sm">picture_as_pdf</span> XUẤT PDF
+                    </button>
+</div>
+</div>
+<!-- Summary Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4 lg:gap-card-gap">
+<div class="bg-surface-container p-5 lg:p-6 rounded-xl border border-outline-variant flex flex-col justify-between min-h-[126px]">
+<span class="text-on-surface-variant font-label-caps text-label-caps">TỔNG SỐ VI PHẠM</span>
+<div class="mt-4 flex items-baseline gap-2">
+<span class="text-4xl font-bold text-error">12</span>
+<span class="text-error font-body-md flex items-center text-sm">
+<span class="material-symbols-outlined text-sm">trending_up</span> +15%
+                        </span>
+</div>
+<p class="text-xs text-on-surface-variant mt-2">So với nhiệm vụ #A-2023</p>
+</div>
+<div class="bg-surface-container p-5 lg:p-6 rounded-xl border border-outline-variant flex flex-col justify-between min-h-[126px]">
+<span class="text-on-surface-variant font-label-caps text-label-caps">THỜI GIAN BAY</span>
+<div class="mt-4 flex items-baseline gap-2">
+<span class="text-4xl font-bold text-on-surface">01:45</span>
+<span class="text-on-surface-variant font-data-mono text-sm">Giờ</span>
+</div>
+<div class="w-full bg-surface-variant h-1 rounded-full mt-4">
+<div class="bg-primary h-full w-3/4 rounded-full"></div>
+</div>
+</div>
+<div class="bg-surface-container p-5 lg:p-6 rounded-xl border border-outline-variant flex flex-col justify-between min-h-[126px]">
+<span class="text-on-surface-variant font-label-caps text-label-caps">TỶ LỆ AN TOÀN</span>
+<div class="mt-4 flex items-baseline gap-2">
+<span class="text-4xl font-bold text-secondary">92.4%</span>
+<span class="text-secondary font-body-md text-sm">TỐT</span>
+</div>
+<p class="text-xs text-on-surface-variant mt-2">Ngưỡng cảnh báo: &lt;85%</p>
+</div>
+<div class="bg-surface-container p-5 lg:p-6 rounded-xl border border-outline-variant flex flex-col justify-between min-h-[126px]">
+<span class="text-on-surface-variant font-label-caps text-label-caps">DIỆN TÍCH QUÉT</span>
+<div class="mt-4 flex items-baseline gap-2">
+<span class="text-4xl font-bold text-on-surface">1.2</span>
+<span class="text-on-surface-variant font-data-mono text-sm">km²</span>
+</div>
+<p class="text-xs text-on-surface-variant mt-2 text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">check_circle</span> Phủ sóng 100%
+                    </p>
+</div>
+</div>
+<!-- Charts Section -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-card-gap">
+<!-- Bar Chart: Violations by Type -->
+<div class="bg-surface-container p-5 lg:p-6 rounded-xl border border-outline-variant">
+<div class="flex justify-between items-center mb-6 lg:mb-8">
+<h3 class="font-headline-md text-headline-md">Vi phạm theo loại hình</h3>
+<span class="material-symbols-outlined text-on-surface-variant">info</span>
+</div>
+<div class="space-y-6">
+<div class="space-y-2">
+<div class="flex justify-between text-body-md">
+<span class="text-on-surface-variant">Không đội mũ bảo hộ</span>
+<span class="font-data-mono font-bold">5 lần</span>
+</div>
+<div class="h-4 w-full bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-error rounded-full" style="width: 41%"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-body-md">
+<span class="text-on-surface-variant">Không mặc áo phản quang</span>
+<span class="font-data-mono font-bold">4 lần</span>
+</div>
+<div class="h-4 w-full bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-tertiary-container rounded-full" style="width: 33%"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-body-md">
+<span class="text-on-surface-variant">Vào vùng nguy hiểm</span>
+<span class="font-data-mono font-bold">3 lần</span>
+</div>
+<div class="h-4 w-full bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-error-container rounded-full" style="width: 25%"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Pie Chart: Violations by Area (Visualized) -->
+<div class="bg-surface-container p-5 lg:p-6 rounded-xl border border-outline-variant flex flex-col">
+<div class="flex justify-between items-center mb-6 lg:mb-8">
+<h3 class="font-headline-md text-headline-md">Phân bổ theo khu vực</h3>
+<span class="material-symbols-outlined text-on-surface-variant">location_on</span>
+</div>
+<div class="flex-1 flex flex-col md:flex-row items-center justify-around gap-6 lg:gap-8">
+<!-- Custom Visual Pie Chart -->
+<div class="relative w-44 h-44 lg:w-48 lg:h-48">
+<svg class="w-full h-full -rotate-90" viewbox="0 0 100 100">
+<circle cx="50" cy="50" fill="transparent" r="40" stroke="#32353c" stroke-width="20"></circle>
+<circle cx="50" cy="50" fill="transparent" r="40" stroke="#adc6ff" stroke-dasharray="251.2" stroke-dashoffset="125.6" stroke-width="20"></circle> <!-- 50% -->
+<circle class="rotate-[180deg] origin-center" cx="50" cy="50" fill="transparent" r="40" stroke="#df7412" stroke-dasharray="251.2" stroke-dashoffset="188.4" stroke-width="20"></circle> <!-- 25% -->
+<circle class="rotate-[270deg] origin-center" cx="50" cy="50" fill="transparent" r="40" stroke="#93000a" stroke-dasharray="251.2" stroke-dashoffset="188.4" stroke-width="20"></circle> <!-- 25% -->
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-2xl font-bold">12</span>
+<span class="text-[10px] uppercase font-bold tracking-widest opacity-50">Sự vụ</span>
+</div>
+</div>
+<div class="space-y-4 flex-1 w-full max-w-xs">
+<div class="flex items-center gap-3">
+<div class="w-3 h-3 rounded-sm bg-primary"></div>
+<span class="flex-1 text-on-surface-variant text-body-md">Khu vực A (Xây thô)</span>
+<span class="font-data-mono font-bold">50%</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-3 h-3 rounded-sm bg-tertiary-container"></div>
+<span class="flex-1 text-on-surface-variant text-body-md">Khu vực B (Hầm)</span>
+<span class="font-data-mono font-bold">25%</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-3 h-3 rounded-sm bg-error-container"></div>
+<span class="flex-1 text-on-surface-variant text-body-md">Khu vực C (Cổng)</span>
+<span class="font-data-mono font-bold">25%</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Violation Log Table -->
+<div class="bg-surface-container rounded-xl border border-outline-variant overflow-hidden">
+<div class="p-4 lg:p-6 border-b border-outline-variant flex justify-between items-center">
+<h3 class="font-headline-md text-headline-md">Nhật ký Vi phạm chi tiết</h3>
+<div class="flex gap-2">
+<select class="bg-surface-container-low border border-outline-variant text-on-surface text-xs lg:text-sm rounded px-2 py-1 outline-none">
+<option>Tất cả mức độ</option>
+<option>Nghiêm trọng</option>
+<option>Trung bình</option>
+</select>
+<button class="p-1 hover:bg-surface-variant rounded text-on-surface-variant">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-surface-container-high border-b border-outline-variant">
+<tr>
+<th class="px-6 py-4 font-label-caps text-[10px] lg:text-label-caps text-on-surface-variant uppercase tracking-wider">BẰNG CHỨNG (DRONE)</th>
+<th class="px-6 py-4 font-label-caps text-[10px] lg:text-label-caps text-on-surface-variant uppercase tracking-wider">LOẠI VI PHẠM</th>
+<th class="px-6 py-4 font-label-caps text-[10px] lg:text-label-caps text-on-surface-variant uppercase tracking-wider">VỊ TRÍ</th>
+<th class="px-6 py-4 font-label-caps text-[10px] lg:text-label-caps text-on-surface-variant uppercase tracking-wider">THỜI GIAN</th>
+<th class="px-6 py-4 font-label-caps text-[10px] lg:text-label-caps text-on-surface-variant uppercase tracking-wider">MỨC ĐỘ</th>
+<th class="px-6 py-4 font-label-caps text-[10px] lg:text-label-caps text-on-surface-variant uppercase tracking-wider">HÀNH ĐỘNG</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-4">
+<div class="relative w-24 h-14 rounded overflow-hidden border border-outline-variant group">
+<img class="w-full h-full object-cover grayscale-[0.5] group-hover:grayscale-0 transition-all" data-alt="A high-resolution aerial drone capture of a construction worker without a hard hat, seen from a top-down tactical angle. The lighting is harsh midday sun casting strong shadows on a dusty grey concrete foundation in a dark-themed construction environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcr5szOwKwlX6oqGjOnkOclfpwmSr42SyjT3YVXU_ntYWHgqcAYBlW8QkfL-ipqgntVDH073joZNaeLdMafvW2v4bvUYEoeO9jJUqZ45dz5d8xuQC58WI2Fl54h4rIVCmNFUTEDWmYUl8iN31lPSbGh-ORP-Lvk3oj2W63OTwhomKIyvx73pR6d3zelp20BdfsX5IQz_CciNl4RHptZdE0S9BhVzIHqWRU_fDGpGD0MR-MkXhE50Yk3_0rh-it4eP3Nwnda4xq17Q"/>
+<div class="absolute inset-0 bg-error/20 border border-error opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="absolute bottom-1 right-1 bg-black/70 text-[8px] px-1 text-white font-data-mono">CAM-04</div>
+</div>
+</td>
+<td class="px-6 py-4 font-body-md text-on-surface">Không đội mũ bảo hộ</td>
+<td class="px-6 py-4 font-body-md text-on-surface-variant">Khu vực A-04</td>
+<td class="px-6 py-4 font-data-mono text-on-surface-variant">13:12:45</td>
+<td class="px-6 py-4">
+<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-error-container text-on-error-container uppercase">Nghiêm trọng</span>
+</td>
+<td class="px-6 py-4">
+<button class="text-primary hover:underline font-label-caps text-[10px] flex items-center gap-1">
+                                        CHI TIẾT <span class="material-symbols-outlined text-[12px]">open_in_new</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-4">
+<div class="relative w-24 h-14 rounded overflow-hidden border border-outline-variant group">
+<img class="w-full h-full object-cover grayscale-[0.5] group-hover:grayscale-0 transition-all" data-alt="A tactical drone surveillance image showing a worker in civilian clothes instead of a reflective vest, walking through a restricted zone marked by red warning tape on a dark industrial site. Sharp focus on the subject with high technical contrast." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDK4KV_vscQ-YrcZ6tnOx-WsV1ZBOCW6BxhWpTgUHo1j64Ly_LAs2rPh9RjiXyohCQC8RNPsG5djWLJF7rUOzSGYdQjoo_KoSWJUSMmxdDJggU5CPEsK-AoXSd7iwEP1aTX19o75DsWjAsJ3ykNvZju4qyqSR607SXa4zkOwQ5PXP6pfX7S0zXCwcn3ck1KGc18Qn78XcCf1vRhT-T5mQ3Wkh-rQd4YjPxpcf3IO60H8qEmYEz6tjTvp1igbxHPhuNvZzovXJlprUA"/>
+<div class="absolute bottom-1 right-1 bg-black/70 text-[8px] px-1 text-white font-data-mono">CAM-02</div>
+</div>
+</td>
+<td class="px-6 py-4 font-body-md text-on-surface">Không mặc áo phản quang</td>
+<td class="px-6 py-4 font-body-md text-on-surface-variant">Khu vực B-Hầm</td>
+<td class="px-6 py-4 font-data-mono text-on-surface-variant">13:25:02</td>
+<td class="px-6 py-4">
+<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-tertiary-container text-on-tertiary-container uppercase">Trung bình</span>
+</td>
+<td class="px-6 py-4">
+<button class="text-primary hover:underline font-label-caps text-[10px] flex items-center gap-1">
+                                        CHI TIẾT <span class="material-symbols-outlined text-[12px]">open_in_new</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-4">
+<div class="relative w-24 h-14 rounded overflow-hidden border border-outline-variant group">
+<img class="w-full h-full object-cover grayscale-[0.5] group-hover:grayscale-0 transition-all" data-alt="Night-vision thermal drone view of a human figure trespassing into a high-voltage dangerous zone at a construction site. Red heat signatures contrast against a deep navy blue and black background, with glowing digital bounding boxes." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsSsDMVzLLP-Y1GEfIXguy-WkbfqlgvL2tkaaHXVz2P8caZaqAGn4GIMq576ikdRyFk8y8p7mqVesSnI7boJKtTUTj2vA-OCeVHDnB9NicKKceBae6HhyUsyWhoBz0dTo5j7zJvE8f-zKRcf6_8zDYnlebt8ACCa7gifxnWxlKe5lk0BHkDNnRE_RuRp3utcGVY79GkBOUcTap6A3YOdJST4By4jfQuf6ZJaHJhbmMat3leNyMar289cJB3CimoJAyY6XTGoAwEho"/>
+<div class="absolute bottom-1 right-1 bg-black/70 text-[8px] px-1 text-white font-data-mono">CAM-07</div>
+</div>
+</td>
+<td class="px-6 py-4 font-body-md text-on-surface">Vào vùng nguy hiểm</td>
+<td class="px-6 py-4 font-body-md text-on-surface-variant">Trạm biến áp tạm</td>
+<td class="px-6 py-4 font-data-mono text-on-surface-variant">13:45:18</td>
+<td class="px-6 py-4">
+<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-error-container text-on-error-container uppercase">Nghiêm trọng</span>
+</td>
+<td class="px-6 py-4">
+<button class="text-primary hover:underline font-label-caps text-[10px] flex items-center gap-1">
+                                        CHI TIẾT <span class="material-symbols-outlined text-[12px]">open_in_new</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-4">
+<div class="relative w-24 h-14 rounded overflow-hidden border border-outline-variant group">
+<img class="w-full h-full object-cover grayscale-[0.5] group-hover:grayscale-0 transition-all" data-alt="A wide-angle aerial surveillance shot of a group of workers on a scaffolding structure without safety harnesses properly attached. High density data visual with technical overlays in a dark, professional command center style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDT-kI4k8EZD6gMAm0g9EHY6lKPJu1_lkFYejQylFxKcuwQVtBl3J1QnNHZQM8x7oWtB-IKHgUTc8u8OuRO37evIg2L3qHZ3xjV4VmGD21uq4tS_fRw8ALClcJ3TiiaTK5fyW7ppQmgRpaswb9yTmXxVfeDfp3cHXjnKjWMRbZgDaYyuixFf1bgE_KDxCpMCto5apclL3VKbsvQrngtsHA7fUI3SMNqf0WWxQ8RYAoSHbSZl35-6U1FzrFPJGQZQZ54PeV1ZcJYUDE"/>
+<div class="absolute bottom-1 right-1 bg-black/70 text-[8px] px-1 text-white font-data-mono">CAM-04</div>
+</div>
+</td>
+<td class="px-6 py-4 font-body-md text-on-surface">Vi phạm làm việc trên cao</td>
+<td class="px-6 py-4 font-body-md text-on-surface-variant">Khu vực A-Giàn giáo</td>
+<td class="px-6 py-4 font-data-mono text-on-surface-variant">14:02:11</td>
+<td class="px-6 py-4">
+<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-error-container text-on-error-container uppercase">Nghiêm trọng</span>
+</td>
+<td class="px-6 py-4">
+<button class="text-primary hover:underline font-label-caps text-[10px] flex items-center gap-1">
+                                        CHI TIẾT <span class="material-symbols-outlined text-[12px]">open_in_new</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-4 bg-surface-container-high border-t border-outline-variant flex justify-between items-center text-[10px] lg:text-xs text-on-surface-variant font-data-mono">
+<span>HIỂN THỊ 4 TRÊN 12 SỰ VỤ</span>
+<div class="flex gap-4">
+<button class="hover:text-primary disabled:opacity-30" disabled="">PREVIOUS</button>
+<button class="hover:text-primary">NEXT</button>
+</div>
+</div>
+</div>
+<!-- Telemetry Footer / Quick Stats -->
+<div class="flex flex-wrap gap-3 lg:gap-4 mt-6 lg:mt-8 pb-8 lg:pb-10">
+<div class="px-3 py-1 bg-surface-container-low border border-outline-variant rounded flex items-center gap-2 text-[10px] lg:text-xs">
+<span class="material-symbols-outlined text-sm text-secondary">battery_full</span>
+<span class="font-data-mono text-xs">PIN KẾT THÚC: 24%</span>
+</div>
+<div class="px-3 py-1 bg-surface-container-low border border-outline-variant rounded flex items-center gap-2 text-[10px] lg:text-xs">
+<span class="material-symbols-outlined text-sm text-primary">cloud</span>
+<span class="font-data-mono text-xs">GIÓ TB: 12 KM/H</span>
+</div>
+<div class="px-3 py-1 bg-surface-container-low border border-outline-variant rounded flex items-center gap-2 text-[10px] lg:text-xs">
+<span class="material-symbols-outlined text-sm text-tertiary">warning</span>
+<span class="font-data-mono text-xs">CẢNH BÁO HỆ THỐNG: 0</span>
+</div>
+<div class="px-3 py-1 bg-surface-container-low border border-outline-variant rounded flex items-center gap-2 text-[10px] lg:text-xs">
+<span class="material-symbols-outlined text-sm text-primary">satellite</span>
+<span class="font-data-mono text-xs">GPS LOCK: 18 SV</span>
+</div>
+</div>
+</div>
+</body>
+</html>
